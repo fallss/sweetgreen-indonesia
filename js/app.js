@@ -270,6 +270,7 @@ function initCustomizerModal() {
       backdrop.classList.remove('active');
     }
   }
+  window.closeModal = closeModal;
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => {
@@ -341,31 +342,55 @@ function initCustomizerModal() {
 }
 
 // Cart Drawer System
+window.closeCart = function() {
+  const drawer = document.getElementById('cart-drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+  if (drawer) {
+    drawer.classList.remove('active');
+    drawer.style.transform = '';
+  }
+  if (backdrop) {
+    if (!document.getElementById('customizer-modal')?.classList.contains('active') && 
+        !document.getElementById('kitchen-modal')?.classList.contains('active')) {
+      backdrop.classList.remove('active');
+    }
+  }
+};
+
+window.openCart = function() {
+  const drawer = document.getElementById('cart-drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+  if (!drawer) return;
+  drawer.style.transform = '';
+  drawer.classList.add('active');
+  if (backdrop) backdrop.classList.add('active');
+  renderCart();
+};
+
 function initCart() {
   const drawer = document.getElementById('cart-drawer');
   const backdrop = document.getElementById('drawer-backdrop');
   const openButtons = document.querySelectorAll('[data-action="open-cart"]');
   const closeBtn = document.getElementById('cart-close-btn');
 
-  window.openCart = function() {
-    drawer.classList.add('active');
-    backdrop.classList.add('active');
-    renderCart();
+  openButtons.forEach(btn => btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.openCart();
+  }));
 
-    if (window.Motion) {
-      window.Motion.animate(drawer, { x: ['100%', '0%'] }, { duration: 0.35, easing: 'spring' });
-    }
-  };
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.closeCart();
+    });
+  }
 
-  window.closeCart = function() {
-    drawer.classList.remove('active');
-    if (!document.getElementById('customizer-modal')?.classList.contains('active')) {
-      backdrop.classList.remove('active');
-    }
-  };
-
-  openButtons.forEach(btn => btn.addEventListener('click', openCart));
-  if (closeBtn) closeBtn.addEventListener('click', closeCart);
+  if (backdrop) {
+    backdrop.addEventListener('click', () => {
+      window.closeCart();
+    });
+  }
 }
 
 function addToCart(cartItem) {

@@ -39,7 +39,7 @@
   <!-- Framer Motion Browser Engine (Motion) -->
   <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
 
-  <link rel="stylesheet" href="style.css?v=20261021b">
+  <link rel="stylesheet" href="style.css?v=20261021c">
 </head>
 <body>
 
@@ -516,7 +516,7 @@
   </footer>
 
   <!-- Slide-out Cart Drawer & Backdrop -->
-  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <div class="drawer-backdrop" id="drawer-backdrop" onclick="closeCart()"></div>
 
   <aside class="cart-drawer" id="cart-drawer" aria-label="Tas Belanja">
     <div class="cart-header">
@@ -524,7 +524,7 @@
         <h2 class="cart-title">Tas Belanja Anda</h2>
         <span class="cart-badge" style="font-size: 12px; font-weight: 800; background: var(--color-lime-glow); color: var(--color-forest-shadow); width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">0</span>
       </div>
-      <button class="modal-close-icon-btn" id="cart-close-btn" aria-label="Tutup Tas">
+      <button class="modal-close-icon-btn" id="cart-close-btn" onclick="closeCart()" aria-label="Tutup Tas">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -572,7 +572,7 @@
             <span class="modal-price-pill" id="modal-base-price">Rp 0</span>
           </div>
         </div>
-        <button class="modal-close-icon-btn" id="modal-close-btn" aria-label="Tutup Dialog">
+        <button class="modal-close-icon-btn" id="modal-close-btn" onclick="closeModal()" aria-label="Tutup Dialog">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -720,6 +720,6 @@
 
   <div id="global-toast" class="toast">Menu berhasil ditambahkan ke tas</div>
 
-  <script src="js/app.js?v=20261021b"></script>
+  <script src="js/app.js?v=20261021c"></script>
 </body>
 </html>
