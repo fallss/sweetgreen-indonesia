@@ -108,7 +108,8 @@ graph LR
 - **Animation Engine:** Framer Motion (`motion@11.11.13`) untuk transisi pegas (*spring physics*), *staggered entrance*, dan *fade elevation*
 - **Typography:** Google Fonts (`Plus Jakarta Sans`, `Outfit`, `Inter`)
 - **Assets & Fotografi:** Fotografi kuliner resolusi tinggi dengan kompresi web optimal
-- **Dev Server:** Node.js HTTP Server (`server.js`) atau Python 3 (`http.server`)
+- **Dev Server:** Node.js HTTP Server (`dev-server.js`) atau Python 3 (`http.server`)
+- **Deployment Platform:** Vercel (Edge CDN Static Hosting)
 
 ---
 
@@ -119,9 +120,11 @@ sweetgreen/
 ├── index.html              # Markup semantik utama, Tailwind config, & template modal
 ├── style.css               # Desain sistem, variabel warna HSL/Hex, modal overlay, & media queries
 ├── app.js                  # Logika katalog menu, modal kustomisasi, tas belanja, & generator WhatsApp
-├── server.js               # Zero-dependency local development server (Node.js)
+├── dev-server.js           # Zero-dependency local development server (Node.js)
+├── vercel.json             # Konfigurasi deploy Vercel Edge Static Site
 ├── package.json            # Script manajemen npm & metadata proyek
 ├── README.md               # Dokumentasi profesional proyek
+├── LICENSE                 # Lisensi MIT Open Source
 └── images/                 # Aset fotografi makanan resolusi tinggi
     ├── hero-bowl.jpg           # Warm Harvest Bowl hero banner
     ├── harvest-bowl.jpg        # Foto menu Warm Harvest Bowl
@@ -157,7 +160,7 @@ Pilih salah satu cara di bawah ini:
 ```bash
 npm run dev
 # atau langsung:
-node server.js
+node dev-server.js
 ```
 
 #### Opsi B: Menggunakan Python 3
