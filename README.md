@@ -119,12 +119,14 @@ graph LR
 sweetgreen/
 ├── index.html              # Markup semantik utama, Tailwind config, & template modal
 ├── style.css               # Desain sistem, variabel warna HSL/Hex, modal overlay, & media queries
-├── app.js                  # Logika katalog menu, modal kustomisasi, tas belanja, & generator WhatsApp
-├── dev-server.js           # Zero-dependency local development server (Node.js)
 ├── vercel.json             # Konfigurasi deploy Vercel Edge Static Site
 ├── package.json            # Script manajemen npm & metadata proyek
 ├── README.md               # Dokumentasi profesional proyek
 ├── LICENSE                 # Lisensi MIT Open Source
+├── js/
+│   └── app.js              # Logika katalog menu, modal kustomisasi, tas belanja, & generator WhatsApp
+├── scripts/
+│   └── dev-server.js       # Zero-dependency local development server (Node.js)
 └── images/                 # Aset fotografi makanan resolusi tinggi
     ├── hero-bowl.jpg           # Warm Harvest Bowl hero banner
     ├── harvest-bowl.jpg        # Foto menu Warm Harvest Bowl
@@ -179,7 +181,7 @@ Buka browser dan kunjungi:
 
 ## ⚙️ Konfigurasi WhatsApp
 
-Nomor WhatsApp tujuan untuk pesanan dan customer support dapat dikonfigurasi pada baris teratas file [`app.js`](app.js):
+Nomor WhatsApp tujuan untuk pesanan dan customer support dapat dikonfigurasi pada baris teratas file [`js/app.js`](js/app.js):
 
 ```javascript
 // Konfigurasi Nomor WhatsApp Dapur Sweetgreen Indonesia
