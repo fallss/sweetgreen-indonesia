@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sweetgreen — Makanan Sehat dari Petani Lokal, Warm Bowls &amp; Salad Segar UMKM Indonesia</title>
+  <meta name="description" content="Santap makanan sehat dibuat segar setiap hari dari dapur UMKM lokal. Pilihan warm bowl, salad organik, dan bahan pangan segar dari petani nusantara. Pesan langsung via WhatsApp!">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥗</text></svg>">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'deep-forest': '#00473c',
+            'lime-glow': '#e6ff55',
+            'sage-mist': '#d8e5d6',
+            'warm-sand': '#e8dcc6',
+            'cream-canvas': '#f4f3e7',
+            'forest-shadow': '#0e150e',
+            'pure-ink': '#000000',
+            'warm-gray': '#8c8c82',
+            'slate-gray': '#555555',
+            'whatsapp': '#25d366',
+            'whatsapp-dark': '#128c7e'
+          },
+          fontFamily: {
+            sweetsans: ['Plus Jakarta Sans', 'Outfit', 'sans-serif'],
+            grenette: ['Newsreader', 'Georgia', 'serif'],
+            sweetsanstext: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Framer Motion Browser Engine (Motion) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+
+  <link rel="stylesheet" href="style.css?v=20261021b">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar">
+    <span>Menu Panen Nusantara Telah Tiba: Sayuran Organik Segar &amp; Buah Persik Lokal</span>
+    <span class="badge-lime">Pesan Cepat via WhatsApp</span>
+  </aside>
+
+  <!-- Persistent Site Header (Clean Minimalist Sweetgreen) -->
+  <header class="site-header">
+    <div class="nav-container">
+      <!-- Left: Clean, Single-Line Nav Links -->
+      <nav class="nav-left" aria-label="Navigasi Utama">
+        <a href="#menu-section" class="nav-clean-link">Menu Kami</a>
+        <a href="#keunggulan" class="nav-clean-link">Keunggulan</a>
+        <a href="#mission-section" class="nav-clean-link">Misi UMKM</a>
+        <a href="#catering-section" class="nav-clean-link">Katering</a>
+      </nav>
+
+      <!-- Center: Pure Sweetgreen Wordmark -->
+      <a href="#" class="nav-logo-pure" aria-label="sweetgreen beranda">sweetgreen</a>
+
+      <!-- Right: Action Suite -->
+      <div class="nav-right">
+        <button class="nav-wa-clean" onclick="openGeneralWhatsApp()" title="Hubungi WhatsApp Dapur">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </button>
+
+        <button class="nav-cart-clean" data-action="open-cart" aria-label="Buka Tas Belanja">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <path d="M3 6h18"></path>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>Tas</span>
+          <span class="cart-badge">0</span>
+        </button>
+
+        <button class="btn-nav-clean-order" onclick="openCart()">
+          Pesan
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Clean Kitchen Status Strip (Non-intrusive, Calm, Informative) -->
+  <div class="kitchen-strip-clean">
+    <div class="kitchen-strip-inner">
+      <div class="kitchen-strip-left">
+        <span class="status-dot-static"></span>
+        <span>Ambil pesanan di: <strong id="current-store-name">Dapur UMKM Senopati, Jaksel (Buka s/d 21.00 WIB)</strong></span>
+        <button class="btn-kitchen-switch" onclick="openKitchenModal()">Ganti Gerai</button>
+      </div>
+      <div class="kitchen-strip-right">
+        <span>⚡ Pesanan langsung terhubung ke WhatsApp Dapur</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- Full-Bleed Hero Section with Text Overlay -->
+    <section class="hero-section" aria-label="Menu Panen Unggulan Musim Ini">
+      <img 
+        src="images/hero-bowl.jpg" 
+        alt="Foto semangkuk Warm Harvest Bowl dengan ubi Cilembu panggang, ayam bakar rempah, irisan alpukat segar, beras merah organik dan siraman saus tahini" 
+        class="hero-bg-image"
+      />
+      <div class="hero-container">
+        <div class="hero-overlay-panel">
+          <span class="eyebrow-label">Koleksi Panen Nusantara</span>
+          <h1 class="hero-title">Warm Harvest Bowl</h1>
+          <p class="hero-desc">
+            Ubi Cilembu panggang madu, potongan dada ayam bakar rempah, alpukat mentega segar, beras merah organik, daun bayam hijau, keju feta lokal, dan siraman dressing tahini jeruk nipis alami.
+          </p>
+          <div class="hero-actions">
+            <!-- Direct WhatsApp Order from Hero -->
+            <button class="btn-pill-wa" onclick="orderDirectWhatsApp('harvest-bowl')">
+              <span>💬 Pesan Cepat via WhatsApp • Rp 48.000</span>
+            </button>
+            <button class="btn-pill-primary" onclick="openCustomizer('harvest-bowl')">
+              Kustomisasi Mangkuk
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof & Stats Bar -->
+    <section class="bg-[#e8dcc6] py-6 border-y border-[rgba(14,21,14,0.08)]">
+      <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-3xl font-extrabold text-[#00473c] font-sweetsans">15.000+</div>
+          <div class="text-xs uppercase font-bold text-[#0e150e] mt-1 tracking-wider">Mangkuk Segar Terjual</div>
+        </div>
+        <div>
+          <div class="text-3xl font-extrabold text-[#00473c] font-sweetsans">18+</div>
+          <div class="text-xs uppercase font-bold text-[#0e150e] mt-1 tracking-wider">Kelompok Tani Lokal</div>
+        </div>
+        <div>
+          <div class="text-3xl font-extrabold text-[#00473c] font-sweetsans">4.9 / 5.0</div>
+          <div class="text-xs uppercase font-bold text-[#0e150e] mt-1 tracking-wider">Rating Pelanggan Puas</div>
+        </div>
+        <div>
+          <div class="text-3xl font-extrabold text-[#00473c] font-sweetsans">100%</div>
+          <div class="text-xs uppercase font-bold text-[#0e150e] mt-1 tracking-wider">Garansi Segar Tiap Hari</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 Keunggulan Visual UMKM Pangan Sehat -->
+    <section id="keunggulan" class="features-strip-section">
+      <div class="text-center mb-10">
+        <span class="eyebrow-label">Standar Dapur UMKM</span>
+        <h2 class="text-3xl md:text-4xl font-normal text-[#0e150e] font-sweetsans">
+          Kenapa Makanan Sehat Kami Berbeda?
+        </h2>
+        <p class="text-sm md:text-base text-gray-600 max-w-xl mx-auto mt-2">
+          Komitmen penuh dari petani lokal hingga meja makan Anda tanpa jalan pintas kimiawi.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-pill-card">
+          <div class="feature-icon-badge">🌿</div>
+          <h3 class="feature-card-title">100% Sayuran Mitra Petani</h3>
+          <p class="feature-card-desc">
+            Dipetik dari kebun organik Lembang, Cianjur &amp; Malang tanpa bahan pestisida kimiawi sintetis.
+          </p>
+        </div>
+
+        <div class="feature-pill-card">
+          <div class="feature-icon-badge">🍳</div>
+          <h3 class="feature-card-title">Diracik Segar Tiap Subuh</h3>
+          <p class="feature-card-desc">
+            Saus &amp; dressing artisan di-whisk tiap jam 5 pagi, ayam rempah dipanggang oven tanpa bahan pengawet.
+          </p>
+        </div>
+
+        <div class="feature-pill-card">
+          <div class="feature-icon-badge">📦</div>
+          <h3 class="feature-card-title">Kemasan Ramah Lingkungan</h3>
+          <p class="feature-card-desc">
+            Wadah mangkuk serat jerami alami yang mudah terurai dan alat makan kayu ramah kompos.
+          </p>
+        </div>
+
+        <div class="feature-pill-card">
+          <div class="feature-icon-badge">💬</div>
+          <h3 class="feature-card-title">Pesan Langsung via WhatsApp</h3>
+          <p class="feature-card-desc">
+            Terhubung langsung ke admin dapur gerai terdekat dengan format pesan otomatis tanpa ribet.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual 3 Langkah Mudah Pesan via WhatsApp -->
+    <section class="steps-order-section">
+      <div class="steps-container">
+        <div class="text-center">
+          <span class="eyebrow-label">Kemudahan Pemesanan</span>
+          <h2 class="text-3xl md:text-4xl font-normal text-[#0e150e] font-sweetsans">
+            Alur Pemesanan 3 Langkah Mudah
+          </h2>
+          <p class="text-sm md:text-base text-gray-600 max-w-md mx-auto mt-2">
+            Pesan cepat tanpa perlu registrasi akun berbelit. Semua otomatis terhubung ke WhatsApp dapur!
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3 class="font-bold text-lg text-[#0e150e]">Pilih Menu &amp; Cek Nutrisi</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Pilih mangkuk warm bowl atau salad favorit Anda lengkap dengan rincian kalori, protein, dan serat pangan.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3 class="font-bold text-lg text-[#0e150e]">Kustomisasi Saus &amp; Topping</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Atur takaran saus (sedikit, sedang, dipisah) dan tambahkan ekstra topping alpukat atau keju kambing lokal.
+            </p>
+          </div>
+
+          <div class="step-card border-2 border-[#25d366]">
+            <div class="step-number bg-[#25d366] text-white">3</div>
+            <h3 class="font-bold text-lg text-[#0e150e]">Terkirim ke WhatsApp Dapur 💬</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Klik tombol pesan, WhatsApp otomatis terbuka dengan rincian pesanan rapi siap dikonfirmasi oleh juru masak.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Browsing Section -->
+    <section id="menu-section" class="menu-section">
+      <div class="menu-header">
+        <span class="eyebrow-label">Kreasi Dapur UMKM Kami</span>
+        
+        <!-- Menu Category Tabs -->
+        <div class="category-tabs" role="tablist">
+          <button class="category-tab-btn active" data-category="all" role="tab" aria-selected="true">
+            Semua Menu
+            <span class="tab-dot"></span>
+          </button>
+          <button class="category-tab-btn" data-category="warm-bowls" role="tab" aria-selected="false">
+            Warm Bowls
+            <span class="tab-dot"></span>
+          </button>
+          <button class="category-tab-btn" data-category="salads" role="tab" aria-selected="false">
+            Salad Segar
+            <span class="tab-dot"></span>
+          </button>
+          <button class="category-tab-btn" data-category="sides" role="tab" aria-selected="false">
+            Menu Pendamping
+            <span class="tab-dot"></span>
+          </button>
+          <button class="category-tab-btn" data-category="online-only" role="tab" aria-selected="false">
+            Khusus Online
+            <span class="tab-dot"></span>
+          </button>
+        </div>
+
+        <!-- Dietary Filter Chips -->
+        <div class="menu-sub-bar">
+          <div class="dietary-filters" aria-label="Preferensi diet">
+            <button class="filter-chip active" data-diet="all">Semua Pilihan</button>
+            <button class="filter-chip" data-diet="gluten-free">Bebas Gluten</button>
+            <button class="filter-chip" data-diet="vegetarian">Vegetarian</button>
+            <button class="filter-chip" data-diet="vegan">Vegan</button>
+            <button class="filter-chip" data-diet="high-protein">Tinggi Protein</button>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-gray-500 font-semibold">
+              🌱 Sayur Organik • Tanpa Pengawet
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Cards Grid (3 Columns) -->
+      <div class="product-grid" id="product-grid">
+        <!-- Rendered dynamically by app.js with Framer Motion -->
+      </div>
+    </section>
+
+    <!-- Testimonials / Ulasan Pelanggan Nyata (Social Proof) -->
+    <section class="testimonials-section">
+      <div class="text-center">
+        <span class="eyebrow-label">Kata Komunitas &amp; Pelanggan</span>
+        <h2 class="text-3xl md:text-4xl font-normal text-[#0e150e] font-sweetsans">
+          Cerita Mereka yang Menikmati Mangkuk Sehat Kami
+        </h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="rating-stars">★★★★★</div>
+          <p class="testimonial-text">
+            “Warm Harvest Bowl-nya juara! Ubi Cilembu oven dan ayam rempahnya pas banget. Sayuran bener-bener renyah segar, beda sama salad biasa. Pesan lewat WA cepat dikonfirmasi!”
+          </p>
+          <div class="testimonial-author-row">
+            <div class="testimonial-avatar">NS</div>
+            <div>
+              <div class="font-bold text-sm text-[#0e150e]">Nadira Santoso</div>
+              <div class="text-xs text-gray-500">Karyawan Swasta, SCBD Jakarta</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="rating-stars">★★★★★</div>
+          <p class="testimonial-text">
+            “Kemarin pesan paket katering untuk rapat 35 orang di kantor. Kemasan serat jeraminya rapi dan estetik, saus dipisah higienis. Teman-teman kantor pada ketagihan!”
+          </p>
+          <div class="testimonial-author-row">
+            <div class="testimonial-avatar">DA</div>
+            <div>
+              <div class="font-bold text-sm text-[#0e150e]">Dimas Anggoro</div>
+              <div class="text-xs text-gray-500">Operations Manager, Startup Tech</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="rating-stars">★★★★★</div>
+          <p class="testimonial-text">
+            “Shroomami bowl vegan favorit saya di Jakarta! Rasanya umami gurih alami tanpa micin. Bangga banget ada UMKM lokal yang konsisten dukung petani sayur nusantara.”
+          </p>
+          <div class="testimonial-author-row">
+            <div class="testimonial-avatar">CW</div>
+            <div>
+              <div class="font-bold text-sm text-[#0e150e]">Clara Wijaya</div>
+              <div class="text-xs text-gray-500">Instruktur Yoga, Kemang</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Split Content Section 1 (Sage Mist Background) -->
+    <section id="mission-section" class="split-section sage-band">
+      <div class="split-container">
+        <div class="split-text-stack">
+          <span class="eyebrow-label">Transparansi Dari Tanah Hingga Daun</span>
+          <h2 class="split-display-headline">Makanan sehat berawal dari tanah subur nusantara.</h2>
+          <div class="split-feature-list">
+            <div class="split-feature-item">
+              <span class="split-feature-label">Kemitraan Langsung Petani Lokal</span>
+              <p class="split-feature-desc">
+                Kami bermitra langsung dengan kelompok tani organik di Lembang, Cianjur, dan Malang tanpa perantara tengkulak untuk memastikan hasil panen dipetik saat kesegaran puncaknya.
+              </p>
+            </div>
+            <div class="split-feature-item">
+              <span class="split-feature-label">Diolah Segar Setiap Subuh</span>
+              <p class="split-feature-desc">
+                Setiap pukul 5 pagi di dapur UMKM kami, tim juru masak mengocok saus artisan tanpa bahan pengawet kimia, memanggang ayam rempah, dan memotong aneka sayuran segar.
+              </p>
+            </div>
+            <div class="split-feature-item">
+              <span class="split-feature-label">Pertanian Regeneratif Berkelanjutan</span>
+              <p class="split-feature-desc">
+                Tanah yang sehat menghasilkan pangan yang bernutrisi tinggi. Kami mendukung metode bercocok tanam ramah alam yang menjaga kelestarian ekosistem tanah nusantara.
+              </p>
+            </div>
+          </div>
+          <div>
+            <button class="btn-pill-wa" onclick="openGeneralWhatsApp()">
+              <span>💬 Tanya Info Kemitraan Petani via WA</span>
+            </button>
+          </div>
+        </div>
+        <div class="split-image-wrap">
+          <img 
+            src="images/farm-harvest.jpg" 
+            alt="Petani lokal memegang seikat sayuran organik segar, chard warna-warni, dan lobak merah hasil panen subuh" 
+            class="split-image" 
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial Accent Callout (Grenette Font) -->
+    <section class="editorial-callout-section">
+      <blockquote class="editorial-quote">
+        “Kami percaya bahwa pilihan makanan sehat yang kita santap setiap hari, dari mana asalnya, dan bagaimana dapur UMKM kami mengolahnya dengan penuh ketulusan, memberi dampak nyata bagi kesehatan keluarga dan kemakmuran petani kita.”
+      </blockquote>
+      <cite class="editorial-author">— MANIFESTO SWEETGREEN INDONESIA</cite>
+    </section>
+
+    <!-- Split Content Section 2 (Warm Sand Background - Catering) -->
+    <section id="catering-section" class="split-section warm-sand-band">
+      <div class="split-container reverse">
+        <div class="split-image-wrap">
+          <img 
+            src="images/catering-spread.jpg" 
+            alt="Jamuan prasmanan Sweetgreen Catering di meja kayu berlapis linen dengan mangkuk salad keluarga, roti focaccia, dan minuman sari buah segar" 
+            class="split-image" 
+            loading="lazy"
+          />
+        </div>
+        <div class="split-text-stack">
+          <span class="eyebrow-label">Layanan Katering UMKM</span>
+          <h2 class="split-display-headline">Berkumpul bersama mangkuk bergizi &amp; lezat.</h2>
+          <div class="split-feature-list">
+            <div class="split-feature-item">
+              <span class="split-feature-label">Paket Fleksibel untuk Kantor &amp; Acara</span>
+              <p class="split-feature-desc">
+                Tersedia mangkuk personal berlabel nama individu atau paket prasmanan ramah lingkungan untuk pertemuan mulai dari 10 hingga 500+ porsi.
+              </p>
+            </div>
+            <div class="split-feature-item">
+              <span class="split-feature-label">Kemasan 100% Ramah Lingkungan</span>
+              <p class="split-feature-desc">
+                Dikirim tepat waktu menggunakan wadah berbahan dasar serat jerami alami yang mudah terurai dan alat makan kayu ramah kompos.
+              </p>
+            </div>
+            <div class="split-feature-item">
+              <span class="split-feature-label">Harga Bersahabat &amp; Nutrisi Seimbang</span>
+              <p class="split-feature-desc">
+                Solusi makan siang bergizi untuk rapat kantor, syukuran keluarga, maupun workshop komunitas dengan poin reward khusus UMKM.
+              </p>
+            </div>
+          </div>
+          <div>
+            <!-- Direct WhatsApp Order for Catering -->
+            <button class="btn-pill-wa" onclick="openCateringWhatsApp()">
+              <span>💬 Pesan / Konsultasi Katering via WhatsApp</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating WhatsApp Action Button with Framer Motion Pulse -->
+  <a href="javascript:void(0)" onclick="openGeneralWhatsApp()" class="floating-wa-btn" aria-label="Hubungi WhatsApp Sweetgreen">
+    <div class="wa-pulse-ring"></div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+    </svg>
+    <span>Chat WhatsApp</span>
+  </a>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" id="locations">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-title">sweetgreen</div>
+          <p class="footer-brand-desc">
+            Membangun Indonesia yang lebih sehat lewat koneksi nyata dengan pangan lokal. Dikelola dengan cinta oleh jaringan UMKM kuliner sehat nusantara.
+          </p>
+          <div class="store-location-info mb-4">
+            <span class="store-status-dot"></span>
+            <span>Jaringan Dapur &amp; Gerai UMKM di Jabodetabek &amp; Bandung</span>
+          </div>
+          <button class="btn-card-wa" onclick="openGeneralWhatsApp()">
+            <span>💬 Hubungi Customer Care WA</span>
+          </button>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Pilihan Menu</h4>
+          <ul class="footer-links">
+            <li><a href="#menu-section">Warm Bowls</a></li>
+            <li><a href="#menu-section">Salad Musiman</a></li>
+            <li><a href="#menu-section">Roti Focaccia &amp; Pendamping</a></li>
+            <li><a href="#menu-section">Menu Khusus Online</a></li>
+            <li><a href="#menu-section">Informasi Nutrisi &amp; Alergi</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Tentang UMKM</h4>
+          <ul class="footer-links">
+            <li><a href="#mission-section">Misi Kami</a></li>
+            <li><a href="#mission-section">Mitra Petani Lokal</a></li>
+            <li><a href="#catering-section">Layanan Katering</a></li>
+            <li><a href="javascript:void(0)" onclick="openGeneralWhatsApp()">Kerja Sama Petani</a></li>
+            <li><a href="javascript:void(0)" onclick="openGeneralWhatsApp()">Gabung Tim Dapur</a></li>
+          </ul>
+        </div>
+
+        <div class="newsletter-box">
+          <h4 class="footer-col-title">Dapatkan Kabar Panen</h4>
+          <p style="font-size: 14px; color: var(--color-forest-shadow); line-height: 1.4;">
+            Dapatkan info rilis menu musiman, resep sehat dapur, dan kisah inspiratif petani nusantara langsung di inbox Anda.
+          </p>
+          <form class="newsletter-input-group" onsubmit="event.preventDefault(); showToast('Terima kasih telah berlangganan info panen Sweetgreen!'); this.reset();">
+            <input type="email" placeholder="Alamat email Anda" class="newsletter-input" required />
+            <button type="submit" class="btn-pill-primary" style="padding: 10px 18px; font-size: 14px;">Gabung</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Sweetgreen Indonesia. Seluruh hak cipta dilindungi. Komitmen Pangan Sehat UMKM Nusantara.</div>
+        <div style="display: flex; gap: 24px;">
+          <a href="#" style="color: var(--color-warm-gray);">Kebijakan Privasi</a>
+          <a href="#" style="color: var(--color-warm-gray);">Syarat &amp; Ketentuan</a>
+          <a href="#" style="color: var(--color-warm-gray);">Aksesibilitas</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-out Cart Drawer & Backdrop -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Tas Belanja">
+    <div class="cart-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <h2 class="cart-title">Tas Belanja Anda</h2>
+        <span class="cart-badge" style="font-size: 12px; font-weight: 800; background: var(--color-lime-glow); color: var(--color-forest-shadow); width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">0</span>
+      </div>
+      <button class="modal-close-icon-btn" id="cart-close-btn" aria-label="Tutup Tas">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-items-list" id="cart-items-container">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">Rp 0</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 13.5px; color: var(--color-slate-gray);">
+        <span>Pajak Restoran PB1 (10%)</span>
+        <span id="cart-tax">Rp 0</span>
+      </div>
+      <div class="cart-total-row" style="font-size: 19px; border-top: 1px solid rgba(14, 21, 14, 0.08); padding-top: 12px;">
+        <span>Total Pembayaran</span>
+        <span id="cart-total" style="color: var(--color-deep-forest);">Rp 0</span>
+      </div>
+      
+      <!-- Direct Checkout via WhatsApp -->
+      <button class="btn-pill-wa w-full py-3.5 text-base shadow-md" onclick="checkoutToWhatsApp()">
+        <span>💬 Checkout ke WhatsApp Dapur</span>
+      </button>
+      <div class="text-center text-xs text-gray-500 font-medium">
+        Pesanan langsung dirangkum rapi ke chat admin dapur
+      </div>
+    </div>
+  </aside>
+
+  <!-- Customizer Modal for Bowls (Redesigned Clean & Premium) -->
+  <div class="customizer-modal" id="customizer-modal" role="dialog" aria-modal="true" aria-labelledby="modal-item-title">
+    <div class="modal-card">
+      <!-- Pinned Header -->
+      <div class="modal-dialog-header">
+        <div class="modal-header-main">
+          <span class="modal-eyebrow">Kustomisasi Menu Pilihan</span>
+          <div class="modal-title-row">
+            <h2 class="modal-item-name" id="modal-item-title">Nama Menu</h2>
+            <span class="modal-price-pill" id="modal-base-price">Rp 0</span>
+          </div>
+        </div>
+        <button class="modal-close-icon-btn" id="modal-close-btn" aria-label="Tutup Dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable Content Body with Clean Scrollbar -->
+      <div class="modal-dialog-body">
+        <!-- Compact Food Showcase Banner -->
+        <div class="modal-hero-banner">
+          <img id="modal-item-img" src="" alt="Foto Mangkuk" class="modal-hero-img" />
+          <div class="modal-hero-badge">
+            <span class="badge-dot-green"></span>
+            <span>Bahan Panen Segar Hari Ini</span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p id="modal-item-desc" class="modal-item-desc">
+          Deskripsi bahan dan rempah
+        </p>
+
+        <!-- Section: Takaran Saus / Dressing -->
+        <div class="modal-section-group">
+          <div class="modal-section-header">
+            <span class="modal-section-title">Takaran Saus / Dressing</span>
+            <span class="modal-badge-req">Wajib</span>
+          </div>
+          <div class="dressing-pill-grid">
+            <label class="dressing-pill-opt">
+              <input type="radio" name="dressing-level" value="Sedikit" />
+              <span class="dressing-pill-label">Sedikit</span>
+            </label>
+            <label class="dressing-pill-opt">
+              <input type="radio" name="dressing-level" value="Sedang" checked />
+              <span class="dressing-pill-label">Sedang (Standar)</span>
+            </label>
+            <label class="dressing-pill-opt">
+              <input type="radio" name="dressing-level" value="Banyak" />
+              <span class="dressing-pill-label">Banyak</span>
+            </label>
+            <label class="dressing-pill-opt">
+              <input type="radio" name="dressing-level" value="Pisah di Wadah" />
+              <span class="dressing-pill-label">Dipisah</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Section: Topping Ekstra Organik -->
+        <div class="modal-section-group">
+          <div class="modal-section-header">
+            <span class="modal-section-title">Topping Ekstra Organik</span>
+            <span class="modal-badge-opt">Opsional</span>
+          </div>
+          <div class="addon-cards-stack">
+            <label class="addon-card-item">
+              <div class="addon-card-left">
+                <span class="addon-checkbox-ui">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <div class="addon-text">
+                  <span class="addon-title">Ekstra Alpukat Mentega Segar</span>
+                  <span class="addon-origin">Petani Lokal Lembang</span>
+                </div>
+              </div>
+              <span class="addon-price">+Rp 8.000</span>
+              <input type="checkbox" class="custom-addon-checkbox" data-name="Ekstra Alpukat" data-price="8000" />
+            </label>
+
+            <label class="addon-card-item">
+              <div class="addon-card-left">
+                <span class="addon-checkbox-ui">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <div class="addon-text">
+                  <span class="addon-title">Ekstra Ayam Panggang Rempah</span>
+                  <span class="addon-origin">Dada Ayam Probiotik Unggulan</span>
+                </div>
+              </div>
+              <span class="addon-price">+Rp 10.000</span>
+              <input type="checkbox" class="custom-addon-checkbox" data-name="Ekstra Ayam Panggang" data-price="10000" />
+            </label>
+
+            <label class="addon-card-item">
+              <div class="addon-card-left">
+                <span class="addon-checkbox-ui">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <div class="addon-text">
+                  <span class="addon-title">Ekstra Keju Kambing Lokal</span>
+                  <span class="addon-origin">Artisan Dairy Jogja</span>
+                </div>
+              </div>
+              <span class="addon-price">+Rp 6.000</span>
+              <input type="checkbox" class="custom-addon-checkbox" data-name="Keju Kambing" data-price="6000" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pinned Sticky Footer (Always in View, Dynamic Total) -->
+      <div class="modal-dialog-footer">
+        <button id="modal-add-btn" class="modal-primary-action-btn">
+          <span>Tambahkan ke Tas</span>
+        </button>
+        <button class="modal-wa-action-btn" onclick="orderDirectWhatsApp(currentCustomizingItem?.id)" title="Pesan menu ini langsung via WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+          </svg>
+          <span>Pesan Langsung via WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kitchen Selection Modal (Ganti Dapur / Gerai) -->
+  <div class="kitchen-modal" id="kitchen-modal" role="dialog" aria-modal="true" aria-labelledby="kitchen-modal-title">
+    <div class="modal-card">
+      <div class="modal-dialog-header">
+        <div class="modal-header-main">
+          <span class="modal-eyebrow">Jaringan Gerai Terdekat</span>
+          <h2 class="modal-item-name" id="kitchen-modal-title">Pilih Dapur UMKM</h2>
+          <p class="modal-subtext">Pesanan langsung terhubung ke WhatsApp dapur terdekat untuk penyajian tercepat.</p>
+        </div>
+        <button class="modal-close-icon-btn" onclick="closeKitchenModal()" aria-label="Tutup Pilihan Gerai">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-dialog-body" id="kitchen-options-list">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <div id="global-toast" class="toast">Menu berhasil ditambahkan ke tas</div>
+
+  <script src="app.js?v=20261021b"></script>
+</body>
+</html>
